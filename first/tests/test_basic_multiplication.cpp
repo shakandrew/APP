@@ -5,12 +5,12 @@
 
 void run_tests(std::string file_name, int mode){
     std::ofstream stream(file_name);
-
-/*    multiply_test(stream, MATRIX_MAX_SIZE, MATRIX_MIN_SIZE, MATRIX_MIN_SIZE, MATRIX_MIN_SIZE, mode);
+/*
+    multiply_test(stream, MATRIX_MAX_SIZE, MATRIX_MIN_SIZE, MATRIX_MIN_SIZE, MATRIX_MIN_SIZE, mode);
     multiply_test(stream, MATRIX_MIN_SIZE, MATRIX_MAX_SIZE, MATRIX_MAX_SIZE, MATRIX_MIN_SIZE, mode);
     multiply_test(stream, MATRIX_MED_SIZE, MATRIX_MED_SIZE, MATRIX_MED_SIZE, MATRIX_MED_SIZE, mode);
 */
-    for (int i = 100; i <= 2000; i += 100)
+    for (int i = 8000; i <= 8000; i += 100)
         multiply_test(stream, i, i, i, i, mode);
 
     stream.close();

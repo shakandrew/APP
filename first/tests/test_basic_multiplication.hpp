@@ -11,7 +11,7 @@
 #include <random>
 #include "../include/Matrix.h"
 
-#define MATRIX_MAX_SIZE 800000
+#define MATRIX_MAX_SIZE 8000000
 #define MATRIX_MED_SIZE 800
 #define MATRIX_MIN_SIZE 8
 
@@ -20,7 +20,7 @@
 
 #define MODE_BASIC 1
 #define MODE_RTEMP 2
-#define TESTS_AMOUNT 10
+#define TESTS_AMOUNT 1
 
 void multiply_test(std::ostream &stream, int firstRows, int firstColumns, int secondRows, int secondColumns, int mode);
 void run_tests(std::string file_name, int mode);
