@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/koshachok/src/APP/first/include/Matrix.h
+functional
+-
+fstream
+-
+iostream
+-
+exception
+-
+
+/home/koshachok/src/APP/first/main.cpp
+tests/test_basic_multiplication.hpp
+/home/koshachok/src/APP/first/tests/test_basic_multiplication.hpp
+
+/home/koshachok/src/APP/first/src/Matrix.cpp
+../include/Matrix.h
+/home/koshachok/src/APP/first/include/Matrix.h
+
+/home/koshachok/src/APP/first/tests/test_basic_multiplication.cpp
+test_basic_multiplication.hpp
+/home/koshachok/src/APP/first/tests/test_basic_multiplication.hpp
+
+/home/koshachok/src/APP/first/tests/test_basic_multiplication.hpp
+iostream
+-
+fstream
+-
+chrono
+-
+random
+-
+../include/Matrix.h
+/home/koshachok/src/APP/first/include/Matrix.h
+
