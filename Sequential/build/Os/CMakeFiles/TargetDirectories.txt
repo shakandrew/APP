@@ -1,3 +1,0 @@
-/home/koshachok/src/APP/first/build/Os/CMakeFiles/rebuild_cache.dir
-/home/koshachok/src/APP/first/build/Os/CMakeFiles/first.dir
-/home/koshachok/src/APP/first/build/Os/CMakeFiles/edit_cache.dir
