@@ -43,8 +43,9 @@ void multiply_test(std::ostream &stream, int firstRows, int firstColumns, int se
 }
 
 int randomFn(int maxValue) {
-    std::random_device dev;
+    return maxValue;
+    /*std::random_device dev;
     std::default_random_engine eng(dev());
     std::uniform_int_distribution<int> dist(-maxValue, maxValue);
-    return dist(eng);
+    return dist(eng);*/
 }
