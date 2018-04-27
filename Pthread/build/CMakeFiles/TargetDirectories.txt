@@ -1,0 +1,3 @@
+/home/koshachok/src/APP/Pthread/build/CMakeFiles/rebuild_cache.dir
+/home/koshachok/src/APP/Pthread/build/CMakeFiles/first.dir
+/home/koshachok/src/APP/Pthread/build/CMakeFiles/edit_cache.dir
