@@ -1,18 +1,20 @@
 #include "tests/test_basic_multiplication.hpp"
 
 int main() {
-
+    // sequensial
     run_tests("results.txt", std::pair<int, int>(1,1));
+    // p1
     run_tests("results.txt", std::pair<int, int>(2,1));
     run_tests("results.txt", std::pair<int, int>(4,1));
     run_tests("results.txt", std::pair<int, int>(8,1));
+    // p2
     run_tests("results.txt", std::pair<int, int>(1,2));
     run_tests("results.txt", std::pair<int, int>(1,4));
     run_tests("results.txt", std::pair<int, int>(1,8));
+    // p1-2
     run_tests("results.txt", std::pair<int, int>(2,1));
     run_tests("results.txt", std::pair<int, int>(2,2));
     run_tests("results.txt", std::pair<int, int>(4,2));
-    run_tests("results.txt", std::pair<int, int>(2,4));
 /*
     Matrix A(8000000,8);
     Matrix B(8,8);
