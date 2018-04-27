@@ -48,7 +48,7 @@ public:
 
     int getColumns();
 
-    void multiply(Matrix &A, Matrix &B, int mode);
+    void multiply(Matrix &A, Matrix &B, std::pair<int,int> mode);
 
     void print(std::ostream &stream);
 };
@@ -57,9 +57,8 @@ struct PMMP {
     Matrix* A;
     Matrix* B;
     Matrix* C;
-    int id;
-    int mode;
-    PMMP(Matrix&, Matrix&, Matrix&, int, int);
+    std::pair<int, int> begin, end;
+    PMMP(Matrix&, Matrix&, Matrix&, std::pair<int, int>, std::pair<int, int>);
 };
 
 #endif //FIRST_MATRIX_H
