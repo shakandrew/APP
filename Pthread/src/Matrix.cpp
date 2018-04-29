@@ -2,6 +2,7 @@
 // Created by koshachok on 2/27/18.
 //
 
+#include <utility>
 #include "../include/Matrix.h"
 
 /*
@@ -81,46 +82,59 @@ int Matrix::getColumns() {
     return m;
 }
 
-
 void *parallel_multiply(void *args) {
+    // In data
+    // uno: first - i_step / i; second - j_step
+    // dos: first - id of current thread; second - number of threads to create
     auto data = (PMMP *) args;
-    int i_min = data->begin.first;
-    int i_max = data->end.first;
-    int j_min = data->begin.second;
-    int j_max = data->end.second;
-    int k_lim = data->A->m;
-    LL **A = data->A->table, **B = data->B->table, **C = data->C->table;
-    //std::cout << n << std::endl;
-    for (int i = i_min; i < i_max; i++)
+    if (data->dos.second >= 1) {
+        pthread_t tid[PTHREAD_MAX];
+        int i_min = data->dos.first * data->uno.first;
+        int i_max = (data->dos.first + 1) * data->uno.first;
+        for (int i = i_min; i < i_max; i++) {
+            for (int t_index = 0; t_index < data->dos.second; t_index++) {
+                PMMP temp(*(data->A), *(data->B), *(data->C),
+                          std::pair<int, int>(i, data->uno.second),
+                          std::pair<int, int>(t_index, 0));
+                pthread_create(&tid[t_index], nullptr, parallel_multiply, (void *) &temp);
+            }
+            for (int j = 0; j < data->dos.second; j++)
+                pthread_join(tid[j], nullptr);
+        }
+    } else {
+        int i = data->uno.first;
+        int j_min = data->dos.first * data->uno.second;
+        int j_max = (data->dos.first + 1) * data->uno.second;
+        int k_max = data->A->m;
+        LL **A = data->A->table, **B = data->B->table, **C = data->C->table;
         for (int j = j_min; j < j_max; j++) {
             LL rtemp = 0;
-            for (int k = 0; k < k_lim; k++)
+            for (int k = 0; k < k_max; k++) {
+                //std::cout << "i = " << i << " j = " << j << " k = " << k << std::endl;
                 rtemp += A[i][k] * B[k][j];
+            }
             C[i][j] = rtemp;
         }
-    pthread_exit(NULL);
+    }
+
+    pthread_exit(nullptr);
 }
 
 void Matrix::multiply(Matrix &A, Matrix &B, std::pair<int, int> mode) {
-    /*if (A.n != n || B.m != m || A.m != B.n)
-        return;*/
     pthread_t tid[PTHREAD_MAX];
     int thread_num = mode.first * mode.second;
-    for (int i = 0; i < thread_num; i++) {
-        int i_min = (i % mode.first) * (n / mode.first);
-        int i_max = (i % mode.first + 1) * (n / mode.first);
-        int j_min = (i % mode.second) * (m / mode.second);
-        int j_max = (i % mode.second + 1) * (m / mode.second);
+    int i_step = n / mode.first;
+    int j_step = m / mode.second;
 
-        if ((i+1) % mode.first == 0) i_max = n;
-        if ((i+1) % mode.second == 0) j_max = m;
-
-        PMMP temp(A, B, *this, std::pair<int,int>(i_min, j_min),
-                  std::pair<int, int>(i_max, j_max));
-        pthread_create(&tid[i], NULL, parallel_multiply, (void *) &temp);
+    for (int i = 0; i < mode.first; i++) {
+        PMMP temp(A, B, *this,
+                  std::pair<int, int>(i_step, j_step),
+                  std::pair<int, int>(i, mode.second));
+        pthread_create(&tid[i], nullptr, parallel_multiply, (void *) &temp);
     }
-    for (int i = 0;i < thread_num;i++)
-        pthread_join(tid[i], NULL);
+
+    for (int i = 0; i < thread_num; i++)
+        pthread_join(tid[i], nullptr);
 }
 
 void Matrix::print(std::ostream &stream) {
@@ -131,5 +145,5 @@ void Matrix::print(std::ostream &stream) {
     }
 }
 
-PMMP::PMMP(Matrix &A, Matrix &B, Matrix &C, std::pair<int, int> begin, std::pair<int, int> end)
-        : A(&A), B(&B), C(&C), begin(begin), end(end) {}
+PMMP::PMMP(Matrix &A, Matrix &B, Matrix &C, std::pair<int, int> uno, std::pair<int, int> dos)
+        : A(&A), B(&B), C(&C), uno(std::move(uno)), dos(std::move(dos)) {}

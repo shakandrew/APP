@@ -23,8 +23,11 @@
 #define THREAD_8 8
 #define TESTS_AMOUNT 3
 
-void multiply_test(std::ostream &stream, int firstRows, int firstColumns, int secondRows, int secondColumns, std::pair<int, int> mode);
+void multiply_test(std::ostream &stream, int firstRows, int firstColumns, int secondRows, int secondColumns,
+                   std::pair<int, int> mode);
+
 void run_tests(std::string file_name, std::pair<int, int> mode);
+
 int randomFn(int maxValue);
 
 #endif //FIRST_TEST_BASIC_MULTIPLICATION_H

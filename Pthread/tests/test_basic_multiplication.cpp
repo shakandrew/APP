@@ -3,22 +3,23 @@
 //
 #include "test_basic_multiplication.hpp"
 
-void run_tests(std::string file_name, std::pair<int, int> mode){
+void run_tests(std::string file_name, std::pair<int, int> mode) {
     std::ofstream stream(file_name, std::ios::app);
-    stream << "Mode: [" << mode.first <<";" << mode.second << "]\n";
-
+    stream << "Mode: [" << mode.first << ";" << mode.second << "]\n";
+    /*
     multiply_test(stream, MATRIX_MAX_SIZE, MATRIX_MIN_SIZE, MATRIX_MIN_SIZE, MATRIX_MIN_SIZE, mode);
     multiply_test(stream, MATRIX_MIN_SIZE, MATRIX_MAX_SIZE, MATRIX_MAX_SIZE, MATRIX_MIN_SIZE, mode);
     multiply_test(stream, MATRIX_MED_SIZE, MATRIX_MED_SIZE, MATRIX_MED_SIZE, MATRIX_MED_SIZE, mode);
-    /*
+    */
     for (int i = 100; i <= 2000; i += 100)
         multiply_test(stream, i, i, i, i, mode);
-    */
+
     stream.close();
 }
 
 
-void multiply_test(std::ostream &stream, int firstRows, int firstColumns, int secondRows, int secondColumns, std::pair<int, int> mode) {
+void multiply_test(std::ostream &stream, int firstRows, int firstColumns, int secondRows, int secondColumns,
+                   std::pair<int, int> mode) {
     Matrix A(firstRows, firstColumns);
     A.randomizeMatrix(randomFn, RANDOM_MAX_MATRIX_VALUE);
 

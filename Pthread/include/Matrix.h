@@ -26,7 +26,8 @@ private:
 
     void deleteMatrix();
 
-    friend void * parallel_multiply(void *);
+    friend void *parallel_multiply(void *);
+
 public:
     Matrix();
 
@@ -48,17 +49,19 @@ public:
 
     int getColumns();
 
-    void multiply(Matrix &A, Matrix &B, std::pair<int,int> mode);
+    void multiply(Matrix &A, Matrix &B, std::pair<int, int> mode);
 
     void print(std::ostream &stream);
 };
+
 // Parallel Matrix multiplication params
 struct PMMP {
-    Matrix* A;
-    Matrix* B;
-    Matrix* C;
-    std::pair<int, int> begin, end;
-    PMMP(Matrix&, Matrix&, Matrix&, std::pair<int, int>, std::pair<int, int>);
+    Matrix *A;
+    Matrix *B;
+    Matrix *C;
+    std::pair<int, int> uno, dos;
+
+    PMMP(Matrix &, Matrix &, Matrix &, std::pair<int, int>, std::pair<int, int>);
 };
 
 #endif //FIRST_MATRIX_H
