@@ -1,6 +1,6 @@
 import os
 import sys
-include_str = "#include<stdio.h>\n#include<mpi.h>\n#include <sys/time.h>\n"
+include_str = "#include<stdio.h>\n#include <sys/time.h>\n"
 
 test1 = [['8000000','8','8','8'],
         ['8','8000000','8000000','8'],
@@ -26,15 +26,16 @@ def some(elems, file_in, file_out):
         f.write(elem)
     f.close()
 
-test = test2
+test = test1
 
 if sys.argv[1] == "mpi":
-    for mode in (3,5,9):
+    include_str = include_str + "#include <mpi.h>\n"
+    for mode in (3,):
         print("Mode: " + str(mode-1))
         for elems in test:
             some(elems, "template_mpi.txt", "new.c")
             os.system('mpicc -o prog new.c -O3')
-            os.system('mpirun -n ' + j +' ./prog')
+            os.system('mpirun -n ' + str(mode) +' ./prog')
 else:
     print("Mode: 1")
     for elems in test:
