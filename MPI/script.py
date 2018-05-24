@@ -11,10 +11,10 @@ for i in range(100, 2001, 100):
     test2.append([str(i),str(i),str(i),str(i)])
 
 def some(elems, file_in, file_out):
-    a_rows = "#define NUM_ROWS_A " + elems[0] + "\n"
-    a_cols = "#define NUM_COLUMNS_A " + elems[1] + "\n"
-    b_rows = "#define NUM_ROWS_B " + elems[2] + "\n"
-    b_cols = "#define NUM_COLUMNS_B " + elems[3] + "\n"
+    a_rows = "#define A_ROWS " + elems[0] + "\n"
+    a_cols = "#define A_COLUMNS " + elems[1] + "\n"
+    b_rows = "#define B_ROWS " + elems[2] + "\n"
+    b_cols = "#define B_COLUMNS " + elems[3] + "\n"
     lines = None
     with open(file_in) as f:
         lines = f.readlines()
