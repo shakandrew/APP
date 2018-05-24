@@ -9,10 +9,14 @@
 #include <fstream>
 #include <iostream>
 #include <exception>
+#include <memory>
 #include <pthread.h>
+
 
 #define LL long long
 #define PTHREAD_MAX 8
+
+struct PMMP;
 
 class Matrix {
 private:
@@ -26,8 +30,13 @@ private:
 
     void deleteMatrix();
 
-    friend void *parallel_multiply(void *);
+    friend void *pll_multiply_1(void *);
 
+    friend void *pll_multiply_2(void *);
+
+    friend void *pll_multiply_3(void *);
+
+    friend void pll_multiply_processing(void *);
 public:
     Matrix();
 
@@ -59,9 +68,8 @@ struct PMMP {
     Matrix *A;
     Matrix *B;
     Matrix *C;
-    std::pair<int, int> uno, dos;
-
-    PMMP(Matrix &, Matrix &, Matrix &, std::pair<int, int>, std::pair<int, int>);
+    int arg1, arg2, arg3, arg4, o;
+    PMMP(Matrix *, Matrix *, Matrix *, int,int,int,int);
 };
 
 #endif //FIRST_MATRIX_H

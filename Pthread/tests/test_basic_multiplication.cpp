@@ -6,7 +6,7 @@
 void run_tests(std::string file_name, std::pair<int, int> mode) {
     std::ofstream stream(file_name, std::ios::app);
     stream << "Mode: [" << mode.first << ";" << mode.second << "]\n";
-    /*
+/*
     multiply_test(stream, MATRIX_MAX_SIZE, MATRIX_MIN_SIZE, MATRIX_MIN_SIZE, MATRIX_MIN_SIZE, mode);
     multiply_test(stream, MATRIX_MIN_SIZE, MATRIX_MAX_SIZE, MATRIX_MAX_SIZE, MATRIX_MIN_SIZE, mode);
     multiply_test(stream, MATRIX_MED_SIZE, MATRIX_MED_SIZE, MATRIX_MED_SIZE, MATRIX_MED_SIZE, mode);
